@@ -436,12 +436,12 @@
         "Node name for S&R": "TextEncodeQwenImage21"
       },
       "widgets_values": [
-        "Use the pose from image 1 and preserve the person, clothing and visual appearance from image 2.",
+        "Draw character from image2. Repose the person in image2 to match image1. Preserve their appearance and the scene.",
         "",
         1024
       ],
       "widgets_values_named": {
-        "prompt": "Use the pose from image 1 and preserve the person, clothing and visual appearance from image 2.",
+        "prompt": "Draw character from image2. Repose the person in image2 to match image1. Preserve their appearance and the scene.",
         "negative_prompt": "",
         "resolution": 1024
       }
@@ -731,10 +731,10 @@
         "Node name for S&R": "SaveImage"
       },
       "widgets_values": [
-        "public_poseclone"
+        "Imagens/Qwen_PoseClone"
       ],
       "widgets_values_named": {
-        "filename_prefix": "public_poseclone"
+        "filename_prefix": "Imagens/Qwen_PoseClone"
       }
     },
     {
