@@ -56,6 +56,16 @@ class PublicationTests(unittest.TestCase):
                  if 'seed' in n.get('widgets_values_named', {})]
         self.assertEqual(seeds, [42])
 
+    def test_posestudio_v2_lora(self):
+        # PoseStudio V2 é o LoRA atual do VNCCS v3.0 para Qwen Image 2.1, no layout oficial de pastas.
+        workflow = json.loads((ROOT / 'workflows/poseclone-qwen21.json').read_text(encoding='utf-8'))
+        loras = [n for n in workflow['nodes'] if n['type'] == 'LoraLoaderModelOnly']
+        self.assertEqual(len(loras), 1)
+        expected = 'QI2.1\\VNCCS\\VNCCS_QI2_PoseStudioV2.safetensors'
+        self.assertEqual(loras[0]['widgets_values'][0], expected)
+        self.assertEqual(loras[0]['widgets_values_named']['lora_name'], expected)
+        self.assertNotIn('PoseStudioV1.1', (ROOT / 'workflows/poseclone-qwen21.json').read_text(encoding='utf-8'))
+
 
 if __name__ == '__main__':
     unittest.main()

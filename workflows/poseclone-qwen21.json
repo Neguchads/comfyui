@@ -794,11 +794,11 @@
         "Node name for S&R": "LoraLoaderModelOnly"
       },
       "widgets_values": [
-        "VNCCS_QI2_PoseStudioV1.1.safetensors",
+        "QI2.1\\VNCCS\\VNCCS_QI2_PoseStudioV2.safetensors",
         1
       ],
       "widgets_values_named": {
-        "lora_name": "VNCCS_QI2_PoseStudioV1.1.safetensors",
+        "lora_name": "QI2.1\\VNCCS\\VNCCS_QI2_PoseStudioV2.safetensors",
         "strength_model": 1
       }
     },
