@@ -1,0 +1,18 @@
+# Somente estes arquivos revisados podem ser adicionados normalmente.
+*
+!/.gitignore
+!/README.md
+!/SECURITY.md
+!/NOTICE.md
+!/AGENTS.md
+!/src/
+!/src/pc_tools.py
+!/src/audit_delegation.py
+!/tests/
+!/tests/test_pc_tools.py
+!/tests/test_audit_delegation.py
+!/tests/test_publication.py
+!/scripts/
+!/scripts/check_publication.py
+!/workflows/
+!/workflows/poseclone-qwen21.json
