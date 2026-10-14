@@ -41,6 +41,21 @@ class PublicationTests(unittest.TestCase):
             if named:
                 self.assertEqual(list(named.values()), node['widgets_values'], node['type'])
 
+    def test_validated_prompt_and_output_prefix(self):
+        # Garante o alinhamento com o prompt operacional validado e a pasta de saída.
+        workflow = json.loads((ROOT / 'workflows/poseclone-qwen21.json').read_text(encoding='utf-8'))
+        save = next(n for n in workflow['nodes'] if n['type'] == 'SaveImage')
+        self.assertEqual(save['widgets_values'][0], 'Imagens/Qwen_PoseClone')
+        self.assertEqual(save['widgets_values_named']['filename_prefix'], 'Imagens/Qwen_PoseClone')
+        encoder = next(n for n in workflow['nodes'] if n['type'] == 'TextEncodeQwenImage21')
+        prompt = encoder['widgets_values_named']['prompt']
+        self.assertEqual(prompt, encoder['widgets_values'][0])
+        self.assertIn('Draw character from image2', prompt)
+        self.assertIn('Repose the person in image2 to match image1', prompt)
+        seeds = [n['widgets_values_named']['seed'] for n in workflow['nodes']
+                 if 'seed' in n.get('widgets_values_named', {})]
+        self.assertEqual(seeds, [42])
+
 
 if __name__ == '__main__':
     unittest.main()

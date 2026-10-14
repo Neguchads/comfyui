@@ -13,6 +13,10 @@ Modelos, nodes externos e Python Portable são obtidos pelos canais dos respecti
 
 O arquivo publicado usa `reference.png` como placeholder. Carregue uma imagem própria na interface, escolha/aplique a pose no editor e revise a ordem das referências. A seed de exemplo é 42. Não são distribuídas imagens ou capturas. O template sanitizado passou no preflight; não foi reexecutado em GPU como distribuição pública. Pose, rosto, roupa, anatomia e enquadramento exigem avaliação separada.
 
+O prompt mantém a instrução usada nos testes operacionais: a pose vem de image1 e o personagem de image2. As saídas usam `output/Imagens/Qwen_PoseClone*.png`. Referência, seed e identificadores genéricos da distribuição permanecem diferentes das entradas locais; não foi realizado um novo teste de geração deste template público.
+
+Esta coleção contém apenas o template PoseClone. Outros workflows, a biblioteca de poses, o lançador Windows e ajustes locais no carregador do ComfyUI não são distribuídos aqui. Esses componentes exigem revisão própria antes de uma eventual publicação.
+
 ## Uso em Windows / PowerShell
 
 Python 3.12+, somente biblioteca padrão. Na raiz do clone:
