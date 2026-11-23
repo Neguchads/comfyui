@@ -1,7 +1,20 @@
-# Origem e direitos
+# Origem, direitos e licenças
 
-Coleção independente de configurações e ferramentas de apoio. A instalação, código e distribuição oficiais do ComfyUI pertencem ao projeto Comfy-Org/ComfyUI e conservam sua licença.
+Esta é uma coleção independente de ferramentas Python, testes e templates para uso
+com uma instalação existente do ComfyUI.
 
-O workflow referencia Qwen, PoseStudio e VNCCS; nomes de modelos/classes são referências de compatibilidade. Código, pesos e coleções desses projetos não são redistribuídos aqui. Consulte os autores e licenças antes de obter, modificar ou redistribuir seus componentes.
+O arquivo [LICENSE](LICENSE) concede a licença MIT **somente ao código, documentação
+e demais materiais originais deste repositório sobre os quais Neguchads detém direitos**.
+Isso não altera nem substitui direitos ou licenças de componentes de terceiros.
 
-Este repositório não acrescenta uma licença geral aos materiais. Publicação pública não concede automaticamente uma licença permissiva; a escolha de licença para os materiais próprios fica com o mantenedor. Não atribuir autoria de componentes externos a esta coleção.
+ComfyUI é um projeto mantido por Comfy-Org:
+https://github.com/Comfy-Org/ComfyUI. A licença e os direitos do ComfyUI oficial
+continuam pertencendo a seus respectivos titulares.
+
+Os templates fazem referências a modelos, nós e ferramentas Qwen, VNCCS,
+PoseStudio e outros projetos externos. Nomes e parâmetros de compatibilidade não
+significam redistribuição ou concessão de direitos sobre seus pesos, código, imagens
+ou recursos. Consulte as respectivas licenças antes de obter, modificar ou redistribuir.
+
+A licença MIT não se aplica a materiais de terceiros nem a conteúdos cujo
+licenciamento não esteja comprovado.
