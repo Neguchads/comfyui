@@ -35,4 +35,12 @@ Saídas têm JSON curto e apontam para relatórios locais. `src/cache` e `src/re
 
 ## Contribuição
 
-Use branch e pull request. Antes de enviar, execute testes e `python scripts/check_publication.py --staged`. A lista positiva de arquivos deve ser revisada quando o escopo mudar. `.gitignore` pode ser contornado com `git add -f`; a conferência do índice também rejeita arquivos fora da lista. Actions ficam desativadas nesta versão inicial; testes são locais. Veja SECURITY.md e NOTICE.md.
+Use branch e pull request. Antes de enviar, execute testes e `python scripts/check_publication.py --staged`. A lista positiva de arquivos deve ser revisada quando o escopo mudar. `.gitignore` pode ser contornado com `git add -f`; a conferência do índice também rejeita arquivos fora da lista. Os workflows de CI e auditoria foram adicionados em `.github/workflows/`, com
+Dependabot em `.github/dependabot.yml`. A execução depende da configuração do
+repositório em **Settings → Actions → General**: se Actions estiver desabilitado,
+habilite-o e execute os checks antes de aceitar alterações. Até haver execução
+confirmada no GitHub, os testes locais acima continuam obrigatórios.
+
+Os componentes originais elegíveis estão sob [MIT](LICENSE); a origem e os
+direitos dos componentes externos são esclarecidos em [NOTICE.md](NOTICE.md).
+Veja também [SECURITY.md](SECURITY.md).
