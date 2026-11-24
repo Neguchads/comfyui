@@ -1,0 +1,81 @@
+# Manual evidence only. Never publishes a GitHub Release or uploads game-derived binaries.
+name: Package integrity and SBOM (manual)
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Create evidence staging directory
+        run: mkdir -p evidence
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests -v
+      - run: python scripts/check_publication.py --staged
+      - name: Hash source-only files; do not bundle game assets or generated game code
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, subprocess
+          from pathlib import Path
+          files = subprocess.check_output(['git', 'ls-files', '-z']).split(b'\0')
+          allowed = {'.py', '.c', '.cpp', '.h', '.hpp', '.cmake', '.json', '.toml', '.md', '.txt', '.yml', '.yaml', '.sh', '.ps1', '.cmd', '.lock'}
+          forbidden = {'roms', 'assets', 'generated', 'saves', 'out', 'build', 'runtime', 'game'}
+          result = []
+          for raw in files:
+              if not raw:
+                  continue
+              rel = raw.decode('utf8')
+              p = Path(rel)
+              if p.suffix.lower() not in allowed or any(x.lower() in forbidden for x in p.parts):
+                  continue
+              if p.is_file() and not p.is_symlink():
+                  result.append(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {rel}")
+          assert result, 'No reviewable source files found'
+          Path('evidence/tracked-source.sha256').write_text('\n'.join(result) + '\n', encoding='utf8')
+          PY
+      - name: Generate source dependency inventory (SPDX JSON)
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: evidence/sbom.spdx.json
+          upload-artifact: "false"
+          upload-release-assets: "false"
+      - name: Build evidence bundle and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -czf evidence/source-evidence.tar.gz -C evidence tracked-source.sha256 sbom.spdx.json
+          cd evidence
+          sha256sum source-evidence.tar.gz > "source-evidence.tar.gz.sha256"
+      - name: Attest package provenance (Sigstore)
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: evidence/source-evidence.tar.gz
+      - name: Attest SPDX SBOM to the same package
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: evidence/source-evidence.tar.gz
+          sbom-path: evidence/sbom.spdx.json
+      - name: Save reviewable evidence; no release publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: comfyui-stage2-evidence
+          path: |
+            evidence/source-evidence.tar.gz
+            evidence/source-evidence.tar.gz.sha256
+            evidence/sbom.spdx.json
+          retention-days: 14
+          if-no-files-found: error

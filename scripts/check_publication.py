@@ -8,6 +8,7 @@ import subprocess
 ALLOWED = {'.gitignore', 'README.md', 'SECURITY.md', 'NOTICE.md', 'AGENTS.md',
            'LICENSE', '.github/dependabot.yml',
            '.github/workflows/ci.yml', '.github/workflows/workflow-security.yml',
+           '.github/workflows/supply-chain.yml',
            'src/pc_tools.py', 'src/audit_delegation.py',
            'tests/test_pc_tools.py', 'tests/test_audit_delegation.py', 'tests/test_publication.py',
            'scripts/check_publication.py', 'workflows/poseclone-qwen21.json'}

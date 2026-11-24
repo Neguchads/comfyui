@@ -44,3 +44,11 @@ confirmada no GitHub, os testes locais acima continuam obrigatórios.
 Os componentes originais elegíveis estão sob [MIT](LICENSE); a origem e os
 direitos dos componentes externos são esclarecidos em [NOTICE.md](NOTICE.md).
 Veja também [SECURITY.md](SECURITY.md).
+
+## Automação de integridade — Etapa 2
+
+O workflow manual `Package integrity and SBOM (manual)` prepara inventário SPDX,
+checksums SHA-256 e atestados assinados de **evidências do código público**, nunca
+modelos, pesos, imagens privadas ou arquivos de sessões locais. O workflow não
+publica releases. Enquanto GitHub Actions não estiver habilitado para este
+repositório, a execução precisa ser validada manualmente em Settings → Actions.
