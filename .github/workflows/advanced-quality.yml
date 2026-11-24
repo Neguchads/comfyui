@@ -1,0 +1,20 @@
+# Calls the centrally reviewed workflow at an immutable commit SHA.
+name: Advanced quality — fuzzing and benchmarks
+'on':
+  pull_request:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: advanced-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    uses: Neguchads/codex-config-universal/.github/workflows/reusable-advanced-quality.yml@615f7b52753d53d1a5b8f53416b045eead140265
+    with:
+      stack: python
