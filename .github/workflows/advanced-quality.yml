@@ -15,6 +15,6 @@ concurrency:
 
 jobs:
   quality:
-    uses: Neguchads/codex-config-universal/.github/workflows/reusable-advanced-quality.yml@e8a8134e2621a0041b966ea4ed613b52472cec55
+    uses: Neguchads/codex-config-universal/.github/workflows/reusable-advanced-quality.yml@615f7b52753d53d1a5b8f53416b045eead140265
     with:
       stack: python
